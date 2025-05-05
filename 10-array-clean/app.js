@@ -14,28 +14,16 @@
 
 let arrNum = [-1, 4, 8, -5, 9, -3, 2];
 
-function elemRemoveNegative(num){
-    if (num < 0) {
-        return true;
-    } else {
-        return false;
-    } 
-};
+const elemRemovePositive = (num) => num >= 0;
+const elemRemoveNegative = (num) => num < 0;
 
-function elemRemovePositive(num){
-    if (num >= 0) {
-        return true;
-    } else {
-        return false;
-    } 
-};
-
-function arrFilter(arr, func) {
-    let result = [];
-    console.log(`${func.name} - название функции`);
-    for (let elem of arr){
-        let res = func(elem);
-        if (res == false){
+function arrFilter(arr, fn) {
+    const result = [];
+    console.log(`${fn.name} - название функции`);
+    for (const elem of arr){
+        // let res = func(elem);
+        // if (res == false){ аналогично тому, что написано ниже
+        if (!fn(elem)) {
             result.push(elem);
         }
     }

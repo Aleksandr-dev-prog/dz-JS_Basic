@@ -59,6 +59,58 @@ console.log(validNumCard(numCard1));
 console.log(validNumCard(numCard2));
 
 
+//код от наставника
+
+//Функции для генерации данных (номеров карт): 
+function getRandomNumber(min = 0, max = 9){
+   return Math.floor(Math.random() * (max - min)) + min
+}
+
+function generateArray(fn, count){
+   return Array.from({ length: count }, () => fn())
+}
+function generateCardPart(fn, count){
+   return generateArray(fn, count).join('')
+}
+
+function getRandomCardNumber() {
+   const cardNumber = generateArray(() => generateCardPart(getRandomNumber, 4), 4)
+   return cardNumber.join('-');
+}
+
+//Функция валидации номера карты:
+function cardLunaValidate(card) {
+   const cardNumber = card
+       .replaceAll('-', '')
+       .split('')
+       .map((x) => Number(x));
+   if (cardNumber.includes(NaN)) {
+       return NaN;
+   }
+   const isEven = (cardNumber.length - 1) % 2 === 0;
+
+   for (let i = Number(isEven); i < cardNumber.length; i = i + 2) {
+       cardNumber[i] =
+           cardNumber[i] * 2 > 9 ? cardNumber[i] * 2 - 9 : cardNumber[i] * 2;
+   }
+   const sum = cardNumber.reduce((total, el) => total + el);
+   return sum % 10 === 0;
+}
+
+//Функция шаблона вывода и вывод:
+function resultTemplate(card) {
+   const startString = `Карта с номером: ${ card } `;
+   const endString = `получила результат: ${ cardLunaValidate(card) }`;
+   return `${ startString } ${ endString }`;
+}
+
+const cardArray = Array.from({ length: getRandomNumber(5, 30) }, () => getRandomCardNumber())
+const resultArray = cardArray.map(resultTemplate)
+
+for(const result of resultArray){
+   console.log(result);
+}
+
 
 
 
