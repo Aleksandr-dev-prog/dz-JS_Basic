@@ -39,12 +39,20 @@ let isTemplateTask = {
 
 const ToDoList = {
    tasks: [],
+   lastId: 0,
    addTask: function(title, priority){
-      const task = {...isTemplateTask};
-      task.title = title;
-      task.id = ++isTemplateTask.id;
-      task.priority = priority;
-      this.tasks.push(task);
+      // const task = {...isTemplateTask};
+      // task.title = title;
+      // task.id = ++isTemplateTask.id;
+      // task.priority = priority;
+      // this.tasks.push(task);
+
+      // код от наставника
+      this.tasks.push({
+         title,
+         id: ++this.lastId,
+         priority,
+     });
    },
    removeTask: function(id){
       this.tasks = this.tasks.filter(elem => elem.id !== id);

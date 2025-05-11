@@ -27,9 +27,14 @@ function query(obj){
 console.log(query(queryObj));
 
 
+// код от наставника
+
+const queryFn = (params) => Object.entries(params).map(x => x.join('=')).join('&')
+console.log(queryFn(queryObj));
 
 
-
+const queryFunc = (url, params) => `${url}/?${Object.entries(params).map(x => x.join('=')).join('&')}`
+console.log(queryFn(queryObj));
 
 
 
